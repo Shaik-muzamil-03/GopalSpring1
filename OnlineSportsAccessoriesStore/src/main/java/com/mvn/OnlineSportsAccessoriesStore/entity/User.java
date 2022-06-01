@@ -38,7 +38,8 @@ public class User {
 	
 	
 	
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Orders order;
 	
 	
 
@@ -57,12 +58,8 @@ public class User {
 
 
 
-
-
-
-
 	public User(int userId, String username, String password, String role, long debitCardNo, int totalPurchase,
-			UserDetails userDeatils) {
+			UserDetails userDeatils, Orders order) {
 		super();
 		this.userId = userId;
 		Username = username;
@@ -71,11 +68,8 @@ public class User {
 		DebitCardNo = debitCardNo;
 		TotalPurchase = totalPurchase;
 		this.userDeatils = userDeatils;
+		this.order = order;
 	}
-
-
-
-
 
 
 
@@ -93,17 +87,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
-
-
-
 
 
 
@@ -121,17 +107,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setUsername(String username) {
 		Username = username;
 	}
-
-
-
-
 
 
 
@@ -149,17 +127,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setPassword(String password) {
 		Password = password;
 	}
-
-
-
-
 
 
 
@@ -177,17 +147,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-
-
-
 
 
 
@@ -205,17 +167,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setDebitCardNo(long debitCardNo) {
 		DebitCardNo = debitCardNo;
 	}
-
-
-
-
 
 
 
@@ -233,17 +187,9 @@ public class User {
 
 
 
-
-
-
-
 	public void setTotalPurchase(int totalPurchase) {
 		TotalPurchase = totalPurchase;
 	}
-
-
-
-
 
 
 
@@ -261,10 +207,6 @@ public class User {
 
 
 
-
-
-
-
 	public void setUserDeatils(UserDetails userDeatils) {
 		this.userDeatils = userDeatils;
 	}
@@ -275,18 +217,30 @@ public class User {
 
 
 
+	public Orders getOrder() {
+		return order;
+	}
+
+
+
+
+
+
+
+	public void setOrder(Orders order) {
+		this.order = order;
+	}
+
+
+
 
 
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(DebitCardNo, Password, TotalPurchase, Username, role, userDeatils, userId);
+		return Objects.hash(DebitCardNo, Password, TotalPurchase, Username, order, role, userDeatils, userId);
 	}
-
-
-
-
 
 
 
@@ -305,13 +259,9 @@ public class User {
 		User other = (User) obj;
 		return DebitCardNo == other.DebitCardNo && Objects.equals(Password, other.Password)
 				&& TotalPurchase == other.TotalPurchase && Objects.equals(Username, other.Username)
-				&& Objects.equals(role, other.role) && Objects.equals(userDeatils, other.userDeatils)
-				&& userId == other.userId;
+				&& Objects.equals(order, other.order) && Objects.equals(role, other.role)
+				&& Objects.equals(userDeatils, other.userDeatils) && userId == other.userId;
 	}
-
-
-
-
 
 
 
@@ -323,9 +273,8 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", Username=" + Username + ", Password=" + Password + ", role=" + role
 				+ ", DebitCardNo=" + DebitCardNo + ", TotalPurchase=" + TotalPurchase + ", userDeatils=" + userDeatils
-				+ "]";
+				+ ", order=" + order + "]";
 	}
-
 
 
 

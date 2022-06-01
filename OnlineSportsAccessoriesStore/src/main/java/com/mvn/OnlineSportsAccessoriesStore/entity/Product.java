@@ -33,8 +33,7 @@ public class Product {
 	@Column(nullable = true)
 	private Discounts discount;
 	
-	@ManyToMany
-	private List<Orders> manyOrders;
+
 	
 	
 	
@@ -60,7 +59,7 @@ public class Product {
 		this.info = info;
 		CartStatus = cartStatus;
 		this.discount = discount;
-		this.manyOrders = manyOrders;
+	
 	}
 
 
@@ -179,25 +178,9 @@ public class Product {
 
 
 
-	public List<Orders> getManyOrders() {
-		return manyOrders;
-	}
-
-
-
-
-
-	public void setManyOrders(List<Orders> manyOrders) {
-		this.manyOrders = manyOrders;
-	}
-
-
-
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(CartStatus, cost, discount, iD, info, manyOrders, name, sportType);
+		return Objects.hash(CartStatus, cost, discount, iD, info, name, sportType);
 	}
 
 
@@ -215,8 +198,7 @@ public class Product {
 		Product other = (Product) obj;
 		return Objects.equals(CartStatus, other.CartStatus) && cost == other.cost
 				&& Objects.equals(discount, other.discount) && iD == other.iD && Objects.equals(info, other.info)
-				&& Objects.equals(manyOrders, other.manyOrders) && Objects.equals(name, other.name)
-				&& Objects.equals(sportType, other.sportType);
+				&& Objects.equals(name, other.name) && Objects.equals(sportType, other.sportType);
 	}
 
 
@@ -226,10 +208,19 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [iD=" + iD + ", name=" + name + ", cost=" + cost + ", sportType=" + sportType + ", info=" + info
-				+ ", CartStatus=" + CartStatus + ", discount=" + discount + ", manyOrders=" + manyOrders + "]";
+				+ ", CartStatus=" + CartStatus + ", discount=" + discount + "]";
 	}
-	
-	
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

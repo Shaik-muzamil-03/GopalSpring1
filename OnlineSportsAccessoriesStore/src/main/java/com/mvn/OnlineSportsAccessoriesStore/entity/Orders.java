@@ -32,8 +32,8 @@ public class Orders {
 	private String billStatus;
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;
+	@ManyToOne
+	private Product Products;
 	
 	
 	
@@ -50,14 +50,14 @@ public class Orders {
 
 
 
-	public Orders(int orderId, String status, LocalDateTime orderTime, int bill, String billStatus, User user) {
+	public Orders(int orderId, String status, LocalDateTime orderTime, int bill, String billStatus, Product products) {
 		super();
 		this.orderId = orderId;
 		this.status = status;
 		this.orderTime = orderTime;
 		this.bill = bill;
 		this.billStatus = billStatus;
-		this.user = user;
+		Products = products;
 	}
 
 
@@ -155,8 +155,8 @@ public class Orders {
 
 
 
-	public User getUser() {
-		return user;
+	public Product getProducts() {
+		return Products;
 	}
 
 
@@ -164,8 +164,8 @@ public class Orders {
 
 
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setProducts(Product products) {
+		Products = products;
 	}
 
 
@@ -175,7 +175,7 @@ public class Orders {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bill, billStatus, orderId, orderTime, status, user);
+		return Objects.hash(Products, bill, billStatus, orderId, orderTime, status);
 	}
 
 
@@ -192,9 +192,9 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
-		return bill == other.bill && Objects.equals(billStatus, other.billStatus) && orderId == other.orderId
-				&& Objects.equals(orderTime, other.orderTime) && Objects.equals(status, other.status)
-				&& Objects.equals(user, other.user);
+		return Objects.equals(Products, other.Products) && bill == other.bill
+				&& Objects.equals(billStatus, other.billStatus) && orderId == other.orderId
+				&& Objects.equals(orderTime, other.orderTime) && Objects.equals(status, other.status);
 	}
 
 
@@ -205,12 +205,15 @@ public class Orders {
 	@Override
 	public String toString() {
 		return "Orders [orderId=" + orderId + ", status=" + status + ", orderTime=" + orderTime + ", bill=" + bill
-				+ ", billStatus=" + billStatus + ", user=" + user + "]";
+				+ ", billStatus=" + billStatus + ", Products=" + Products + "]";
 	}
 
 
 
-	
+
+
+
+
 
 
 
