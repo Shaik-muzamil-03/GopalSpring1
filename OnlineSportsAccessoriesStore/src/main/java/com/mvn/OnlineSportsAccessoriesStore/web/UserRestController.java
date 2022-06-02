@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mvn.OnlineSportsAccessoriesStore.dto.LoginDTO;
+import com.mvn.OnlineSportsAccessoriesStore.dto.LoginResponseDTO;
 import com.mvn.OnlineSportsAccessoriesStore.exceptions.InvalidUserException;
 import com.mvn.OnlineSportsAccessoriesStore.exceptions.WrongUserOrPasswordException;
 import com.mvn.OnlineSportsAccessoriesStore.service.UserService;
 import com.mvn.OnlineSportsAccessoriesStore.validate.ValidateEntry;
 
-
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -28,13 +28,14 @@ import com.mvn.OnlineSportsAccessoriesStore.entity.User;
 
 
 @RestController
+@CrossOrigin(origins= {"http://localhost:8080","http://localhost:4200"},allowedHeaders="*")
 @RequestMapping("/home")
 public class UserRestController {
 	@Autowired
 	UserService userService;
 	
 	@PostMapping("/user/login")
-	public boolean doLogin(@RequestBody LoginDTO loginObj,HttpServletRequest req) throws InvalidUserException,WrongUserOrPasswordException{
+	public LoginResponseDTO doLogin(@RequestBody LoginDTO loginObj,HttpServletRequest req) throws InvalidUserException,WrongUserOrPasswordException{
 		String username = loginObj.getUsername();
 		String password = loginObj.getPassword();
 		if(ValidateEntry.validateNullEntry(username)&&ValidateEntry.validateNullEntry(password)) {
@@ -50,7 +51,8 @@ public class UserRestController {
 					session.setAttribute("role", role);
 					session.setAttribute("username",username);
 					session.setAttribute("password",password);
-					return true;
+					LoginResponseDTO loginResponse = new LoginResponseDTO(username,password,role,true);
+					return loginResponse;
 					
 				
 				
